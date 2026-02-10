@@ -1,16 +1,19 @@
 pipeline {
-    agent any 
+    agent any
 
-    stages { // <--- This is the ONLY top-level stages block
-        stage('Build') { 
-            steps { 
-                sh 'echo "Building..."'
-            }
-        }
-        stage('Test') {
+    stages {
+        stage('Checkout GIT') {
             steps {
-                sh 'echo "Testing..."'
+                echo 'Pulling...'
+                git branch: 'master',
+                    url: 'https://github.com/mohamedbennour31/Exemple2.git'
             }
         }
-    } // <--- Close stages
-} // <--- Close pipeline
+
+        stage('Testing Maven') {
+            steps {
+                sh 'mvn -version'
+            }
+        }
+    }
+}
