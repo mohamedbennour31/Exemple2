@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.studentmanagement.entities.Department;
 import tn.esprit.studentmanagement.repositories.DepartmentRepository;
-
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
-
 public class DepartmentService implements IDepartmentService {
+
     @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @Override
     public List<Department> getAllDepartments() {
@@ -20,9 +20,9 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public Department getDepartmentById(Long idDepartment) {
-    return departmentRepository.findById(idDepartment)
-            .orElseThrow(() -> new EntityNotFoundException("Département non trouvé avec l'id : " + idDepartment));
-}
+        return departmentRepository.findById(idDepartment)
+                .orElseThrow(() -> new EntityNotFoundException("Département non trouvé avec l'id : " + idDepartment));
+    }
 
     @Override
     public Department saveDepartment(Department department) {
@@ -31,6 +31,6 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public void deleteDepartment(Long idDepartment) {
-departmentRepository.deleteById(idDepartment);
+        departmentRepository.deleteById(idDepartment);
     }
 }
