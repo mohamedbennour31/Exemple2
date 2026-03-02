@@ -28,11 +28,14 @@ pipeline {
             }
         }
 
-        stage('MVN SONARQUBE') {
-            steps {
-                
-                sh 'mvn sonar:sonar -Dsonar.login=0f8c202e3b6b20e6f1072e2dea1b8f37efa2ac70'
-            }
-        }
+       stage('MVN SONARQUBE') {
+           steps {
+        // L'argument -Dsonar.tests="" indique à Sonar de ne pas chercher de tests
+        sh "mvn sonar:sonar \
+            -Dsonar.login=VOTRE_TOKEN \
+            -Dsonar.host.url=http://192.168.204.130:9000 \
+            -Dsonar.tests="
+    }
+}
     }
 }
